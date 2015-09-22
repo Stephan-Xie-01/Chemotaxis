@@ -1,18 +1,22 @@
-Bacteria[] bacteriaArray;//declare bacteria variables here   
+ 
+ Bacteria[] bacteriaArray;//declare bacteria variables here   
  void setup()   
  {
- 	size(600, 600);     
- 	bacteriaArray = new Bacteria[3];//initialize bacteria variables here   
+ 	size(800, 600);     
+ 	bacteriaArray = new Bacteria[100];
+ 	for(int i = 0; i < bacteriaArray.length; i++)
+ 	{
+ 		bacteriaArray[i] = new Bacteria();
+ 	}//initialize bacteria variables here   
  }
     
  
  
  void draw()   
  {   
- 	background(0); 
+ 	 background(0); 
  	for(int i = 0; i < bacteriaArray.length; i++)
  	{
- 		bacteriaArray[i] = new Bacteria();
  		bacteriaArray[i].move();
  		bacteriaArray[i].show();
  	}
@@ -22,42 +26,89 @@ Bacteria[] bacteriaArray;//declare bacteria variables here
  }  
  class Bacteria    
  {  
- 	int myX, myY, myColor;   
+ 	int myX, myY, myColor;
+ 	float mySize; 
+ 	double xDirection, yDirection, xBiased, yBiased;
  	Bacteria()
  	{
 	 	myX = 200;
 	 	myY = 200;
 	 	myColor = color(250,(int)(Math.random()*250),(int)(Math.random()*250));
+	 	mySize = 3.0;
+
+	 	//move variables
+	 	xBiased = 0.5;
+	 	yBiased = 0.5;
+
  	}
 
  	void move()
  	{
- 		int direction = (int)(Math.random() *4);
- 		if(direction == 0)
+
+ 		xDirection = (Math.random());
+ 		yDirection = (Math.random());
+
+ 		
+ 		//horizontal
+ 		if(xDirection >= xBiased)
  		{
- 			myX = myX + 5;
+ 			myX = myX + 10; //to the right
+ 		}
+ 		else if(xDirection <= xBiased)
+ 		{
+ 			myX = myX - 10; //to the left
+ 		}
+ 		
+ 		//vertical
+ 		if(yDirection >= yBiased)
+ 		{
+ 			myY = myY + 10; //down
+ 		}
+ 		else if(yDirection <= yBiased)
+ 		{
+ 			myY = myY - 10;		//up	
+ 		}
+
+ 		//mouseReact hor
+ 		if(mouseX >= myX)
+ 		{
+ 			xBiased = 0.75;
 
  		}
- 		else if(direction == 1)
+ 		else if(mouseX <= myX)
  		{
- 			myX = myX - 5;
+ 			xBiased = 0.25;
  		}
- 		else if(direction == 2)
- 		{
- 			myY = myY + 5;
 
- 		}
- 		else
+ 		//mouseReact vert
+ 		if(mouseY >= myY)
  		{
- 			myY = myY - 5;
- 			
+ 			yBiased = 0.75;
  		}
+ 		else if(mouseY <= myY)
+ 		{
+ 			yBiased = 0.25;
+ 		}
+
+ 		//bounce off wall
+ 		//if(myX > 800 || myX < 0)
+ 		//{
+
+ 		//}
+
+
 
  	}
  	void show()
  	{
  		noStroke();
  		fill(myColor);
- 		ellipse(myX, myY, 20, 20);
- 	}//lots of java!   
- }     
+ 		ellipse(myX, myY, mySize, mySize);
+ 		if(mySize >= 10)
+ 			mySize = 10;
+
+ 		mySize += 0.05;
+ 		
+ 	}
+
+ }   
