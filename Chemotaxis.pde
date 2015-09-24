@@ -1,10 +1,9 @@
  
- 
- Bacteria[] bacteriaArray;//declare bacteria variables here   
+Bacteria[] bacteriaArray;//declare bacteria variables here   
  void setup()   
  {
  	size(800, 600);
- 	background(0);     
+ 	//background(0);     
  	bacteriaArray = new Bacteria[100];
  	for(int i = 0; i < bacteriaArray.length; i++)
  	{
@@ -16,7 +15,7 @@
  
  void draw()   
  {   
- 	//background(0); 
+ 	background(0); 
  	for(int i = 0; i < bacteriaArray.length; i++)
  	{
  		bacteriaArray[i].move();
@@ -38,8 +37,7 @@
  	{
 	 	myX = 200;
 	 	myY = 200;
-	 	myOpacity = 300;
-	 	myColor = color(250,(int)(Math.random()*250),(int)(Math.random()*250), myOpacity);
+	 	myColor = color(250,(int)(Math.random()*250),(int)(Math.random()*250));
 	 	mySize = 3.0;
 
 	 	//move variables
@@ -78,22 +76,22 @@
  		//mouseReact hor
  		if(mouseX >= myX)
  		{
- 			xBiased = 0.75; //biased left
+ 			xBiased = 0.70; //biased left
 
  		}
  		else if(mouseX <= myX) //biased right
  		{
- 			xBiased = 0.25;
+ 			xBiased = 0.30;
  		}
 
  		//mouseReact vert
  		if(mouseY >= myY) //biased up
  		{
- 			yBiased = 0.75;
+ 			yBiased = 0.70;
  		}
  		else if(mouseY <= myY) //biased down
  		{
- 			yBiased = 0.25;
+ 			yBiased = 0.30;
  		}
 
  		//bounce off wall hor
@@ -128,13 +126,12 @@
  			mySize = 10;
 
  		mySize += 0.05;
- 		
  	}
 
  	void opacity()
  	{
  		
- 		myOpacity -= 20;
+ 		
  		
  	}
 
@@ -142,7 +139,7 @@
  } 
  void monster()
  {
- 	fill(255, 255, 255);
+ 	fill(255, 255, 255, 100);
  	noStroke();
  	ellipse(mouseX,mouseY,30,30);
- } 
+ }  
